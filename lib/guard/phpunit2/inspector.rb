@@ -38,7 +38,8 @@ module Guard
         # tests paths.
         #
         def tests_files
-          @tests_files ||= Dir.glob( File.join(tests_path, '**', '*Test.php') )
+          @tests_files ||= Dir.glob( File.join(tests_path, '**', '*Test.php') ) +
+            Dir.glob("#{tests_path}/**/*").select{ |f| File.directory?(f) }
         end
 
         # Clears the list of PHPUnit tests.
